@@ -3,18 +3,18 @@ pragma solidity >=0.4.22 <0.9.0;
 
 
 contract Faucet {
-	// special function
-	// it's called when you make a transaction (tx) that doesn't
-	// specify function name to call
 
-	//External functions are part of the Contract interface
-	//which means they can be called via contracts and other
-	// transactions 
+	// storing all the address that have called addFunds contract function
+	 
+	 address[] public funders;
 
 	receive() external payable {}
 
 	function addFunds()  external payable{
-
+		funders.push(msg.sender); // msg.sender recieves the sender address
 	}
 
+
 }
+
+// const instance = await Faucet.deployed()	
