@@ -14,7 +14,16 @@ contract Faucet {
 		funders.push(msg.sender); // msg.sender recieves the sender address
 	}
 
+	function getAllFunders() public view returns(address[] memory) {
+		return funders;
+	}
 
+
+	function getFunderAtIndex(uint8 index) external view returns(address) { 
+		address[] memory _funders = getAllFunders(); 
+		return _funders[index];
+	}
 }
 
 // const instance = await Faucet.deployed()	
+//instance.addFunds({from:accounts[0],value:"2"})
