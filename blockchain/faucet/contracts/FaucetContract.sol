@@ -20,6 +20,14 @@ contract Faucet {
 	// 	return funders;
 	// }
 
+	function getAllFunders() external view returns(address[] memory) {
+		 	address[] memory _funders = new address[](numOfFunders);
+			for (uint i=0; i<numOfFunders; i++) {
+				_funders[i] = funders[i];
+			} 
+			return _funders;
+	}	
+
 
 	function getFunderAtIndex(uint8 index) external view returns(address) { 
 		return funders[index];
@@ -27,8 +35,6 @@ contract Faucet {
 }
 
 //const instace = await Faucet.deployed();
-// instance.addFunds({from:accounts[0],value:"200000000000000"})
-// instace.addFunds({from:accounts[1],value:"200000000000000"})
-
-// const instance = await Faucet.deployed()	
-//instance.addFunds({from:accounts[0],value:"2"})
+// istance.addFunds({from:accounts[0],value:"200000000000000"})
+// istace.addFunds({from:accounts[1],value:"200000000000000"})
+// instace.getFunderAtIndex("0")
