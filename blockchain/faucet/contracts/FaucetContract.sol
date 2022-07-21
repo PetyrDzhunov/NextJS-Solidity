@@ -6,13 +6,16 @@ contract Faucet {
 
 	// storing all the address that have called addFunds contract function
 	uint public numOfFunders;
-	mapping(uint => address)public funders;
+	mapping(address => bool)public funders;
 
 	receive() external payable {}
 
 	function addFunds()  external payable{
-		uint index = numOfFunders++;
-		funders[index] = msg.sender;
+		address funder = msg.sender;
+		if(!funders[funder]) {
+		 numOfFunders++;
+		 funders[funder] = true;
+		}
 		// funders.push(msg.sender); // msg.sender recieves the sender address
 	}
 
