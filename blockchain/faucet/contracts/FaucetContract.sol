@@ -4,8 +4,21 @@ pragma solidity >=0.4.22 <0.9.0;
 
 contract Faucet {
 	uint public numOfFunders;
+	address public owner;
 	mapping(address => bool)public funders;
 	mapping(uint => address)public lutFunders;
+
+	constructor() {
+		owner = msg.sender;  // the creator , the deployer address
+	}
+
+	modifier onlyOwner {
+		require(
+			msg.sender == owner,
+			"Only owner can call this function"
+		);
+		_;
+	}
 
 	modifier limitWithdraw(uint withdrawAmount) {
 		require(
@@ -14,6 +27,17 @@ contract Faucet {
 			);
 			_;
 	}
+
+	function test1()  external onlyOwner{
+		// some managing stuff that only admin should have access to 
+
+	}
+
+	function test2() external onlyOwner {
+		// some managing stuff that only admin should have access to 
+		
+	}
+
 
 	receive() external payable {}
 
@@ -24,6 +48,10 @@ contract Faucet {
 		 funders[funder] = true;
 		 lutFunders[index] = funder;
 		}
+	}	
+
+	function transferOwnership(address newOwner) external onlyOwner {
+		owner = newOwner;
 	}
 
 	function withdraw(uint withdrawAmount) external limitWithdraw(withdrawAmount) {
