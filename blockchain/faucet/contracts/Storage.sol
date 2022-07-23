@@ -37,3 +37,6 @@ contract Storage {
 // 00000000000000000000000032dd689FF9F1Bf3A3D2D07f498474d9F075C5A9f0000000000000000000000000000000000000000000000000000000000000001
 // then go to keccak256 and provide this hexadecimal number to transform it and it returns the alocation of our mapping -
 //abbb5caa7dda850e60932de0934eb1f9d0f59695050f761dc64e443e5030a569 - alocation of our mapping with a 0x in front to say its a hexadecimal num
+
+// 0x0000000000000000000000000000000000000000000000000000000000000002
+

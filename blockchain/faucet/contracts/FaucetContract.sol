@@ -8,12 +8,19 @@ contract Faucet {
 	mapping(uint => address)public lutFunders;
 
 	receive() external payable {}
+
 	function addFunds()  external payable{
 		address funder = msg.sender;
 		if(!funders[funder]) {
 		uint index =  numOfFunders++;
 		 funders[funder] = true;
 		 lutFunders[index] = funder;
+		}
+	}
+
+	function withdraw(uint withdrawAmount) external {
+		if(withdrawAmount < 1000000000000000000) { 
+		payable(msg.sender).transfer(withdrawAmount);
 		}
 	}
 
@@ -24,12 +31,17 @@ contract Faucet {
 			} 
 			return _funders;
 	}	
+
 	function getFunderAtIndex(uint8 index) external view returns(address) { 
 		return lutFunders[index];
 	}
+
 }
 
-//const instace = await Faucet.deployed();
-// istance.addFunds({from:accounts[0],value:"200000000000000"})
-// istace.addFunds({from:accounts[1],value:"200000000000000"})
-// instace.getFunderAtIndex("0")
+//const instance = await Faucet.deployed();
+// instance.addFunds({from:accounts[0],value:"2000000000000000000"})
+// instance.addFunds({from:accounts[1],value:"2000000000000000000"})
+
+//instance.withdraw("500000000000000000",{from:accounts[1]})
+
+// instance.getFunderAtIndex("0")
