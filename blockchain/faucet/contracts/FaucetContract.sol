@@ -2,8 +2,9 @@
 pragma solidity >=0.4.22 <0.9.0;
 import "./Owned.sol";
 import "./Logger.sol";
+import "./IFaucet.sol";
 
-contract Faucet is Owned,Logger {
+contract Faucet is Owned,Logger,IFaucet {
 
 	uint public numOfFunders;
 	mapping(address => bool)public funders;
@@ -18,16 +19,10 @@ contract Faucet is Owned,Logger {
 			_;
 	}
 
-	function test1()  external onlyOwner{
-		// some managing stuff that only admin should have access to 
-
-	}
-
 	function test2() external onlyOwner {
 		// some managing stuff that only admin should have access to 
 		
 	}
-
 
 	receive() external payable {}
 
@@ -36,7 +31,7 @@ contract Faucet is Owned,Logger {
 	}
 
 
-	function addFunds()  external payable{
+	function addFunds() override external payable{
 		address funder = msg.sender;
 		if(!funders[funder]) {
 		uint index =  numOfFunders++;
@@ -49,7 +44,7 @@ contract Faucet is Owned,Logger {
 		owner = newOwner;
 	}
 
-	function withdraw(uint withdrawAmount) external limitWithdraw(withdrawAmount) {
+	function withdraw(uint withdrawAmount) override external limitWithdraw(withdrawAmount) {
 		// able only to withdraw 0,1 ether
 			payable(msg.sender).transfer(withdrawAmount);
 	}
